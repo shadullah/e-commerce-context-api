@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../context/AuthContext/AuthContext";
 // import loginImg from "../../assets/man-hands-hold-touch-tablet-pc-with-login-box-travel-concept.jpg";
 // import axios from "axios";
 // import toast from "react-hot-toast";
 
 const Register = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const location = useLocation();
   // const urls = [
   //   "https://work-notes-server.onrender.com/todo/login/",
@@ -51,6 +53,23 @@ const Register = () => {
   //     );
   //   }
   // };
+  const [full, setFull] = useState("");
+  const [email, setEmail] = useState("");
+  const [pas, setPass] = useState("");
+  const { register } = useAuth();
+
+  const handleReg = (e) => {
+    e.preventDefault();
+
+    if (!email) return;
+
+    register({ full, email, pas });
+    setFull("");
+    setEmail("");
+    setPass("");
+    navigate("/login");
+  };
+
   return (
     <div>
       <div className="w-full h-screen block md:flex">
@@ -66,10 +85,7 @@ const Register = () => {
             FurniFlex wants you to be Register
           </p>
 
-          <form
-            // onSubmit={handleLogin}
-            className="mx-4 md:mx-14 py-6 md:py-16"
-          >
+          <form onSubmit={handleReg} className="mx-4 md:mx-14 py-6 md:py-16">
             <div>
               <div className="w-full px-3 mb-6">
                 <label className="block uppercase tracking-wide text-lime-600 text-xs font-bold mb-2">
@@ -80,6 +96,8 @@ const Register = () => {
                   name="fullname"
                   type="text"
                   required
+                  value={full}
+                  onChange={(e) => setFull(e.target.value)}
                 />
               </div>
               <div className="w-full px-3 mb-6">
@@ -91,6 +109,8 @@ const Register = () => {
                   name="email"
                   type="text"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="w-full px-3 mb-6">
@@ -102,6 +122,8 @@ const Register = () => {
                   name="password"
                   type="password"
                   required
+                  value={pas}
+                  onChange={(e) => setPass(e.target.value)}
                 />
               </div>
             </div>

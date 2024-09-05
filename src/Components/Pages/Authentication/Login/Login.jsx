@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../context/AuthContext/AuthContext";
 // import loginImg from "../../assets/man-hands-hold-touch-tablet-pc-with-login-box-travel-concept.jpg";
 // import axios from "axios";
 // import toast from "react-hot-toast";
 
 const Login = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const location = useLocation();
   // const urls = [
   //   "https://work-notes-server.onrender.com/todo/login/",
@@ -51,6 +53,23 @@ const Login = () => {
   //     );
   //   }
   // };
+
+  const [email, setEmail] = useState("");
+  const [password, setPass] = useState("");
+  const { login } = useAuth();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    // login(email, pas);
+
+    if (login(email)) {
+      navigate("/");
+    } else {
+      window.alert("invalid credentials. try again!!");
+    }
+  };
+
   return (
     <div>
       <div className="w-full h-screen block md:flex">
@@ -73,20 +92,19 @@ const Login = () => {
             FurniFlex wants you to be Login
           </p>
 
-          <form
-            // onSubmit={handleLogin}
-            className="mx-4 md:mx-14 py-6 md:py-16"
-          >
+          <form onSubmit={handleLogin} className="mx-4 md:mx-14 py-6 md:py-16">
             <div>
               <div className="w-full px-3 mb-6">
                 <label className="block uppercase tracking-wide text-violet-600 text-xs font-bold mb-2">
-                  username
+                  email
                 </label>
                 <input
                   className="appearance-none border-b-2 border-violet-500 w-full py-2 px-3 text-gray-700 "
-                  name="username"
+                  name="email"
                   type="text"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="w-full px-3 mb-6">
@@ -98,6 +116,11 @@ const Login = () => {
                   name="password"
                   type="password"
                   required
+                  value={password}
+                  onChange={(e) => {
+                    console.log("password :", e.target.value);
+                    setPass(e.target.value);
+                  }}
                 />
               </div>
             </div>
