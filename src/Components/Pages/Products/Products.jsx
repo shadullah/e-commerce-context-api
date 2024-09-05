@@ -1,24 +1,9 @@
 // import axios from "axios";
-import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import axios from "axios";
+import { useProduct } from "../../../context/ProductContext/ProductContext";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await axios.get("products.json");
-        // const result = await res.json();
-        setProducts(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProducts();
-  }, []);
+  const { products } = useProduct();
   return (
     <div>
       <div className="flex justify-between">
