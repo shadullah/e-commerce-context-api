@@ -6,9 +6,11 @@ const Navbar = () => {
     <div>
       <div className="flex justify-between  items-center py-3 px-12 bg-gray-300">
         <div>
-          <h1 className="text-3xl ">
-            Furni<span className="text-blue-500">Flex</span>
-          </h1>
+          <Link to="/">
+            <h1 className="text-3xl ">
+              Furni<span className="text-blue-500">Flex</span>
+            </h1>
+          </Link>
         </div>
         <div>
           <ul className="flex">
