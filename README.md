@@ -15,7 +15,7 @@ https://github.com/shadullah/e-commerce-context-api
 Watch Live demo here:
 
 ```bash
-https://lazz-pharma-front.vercel.app/
+https://e-commerce-context-api-chi.vercel.app/
 ```
 
 ## Installation
