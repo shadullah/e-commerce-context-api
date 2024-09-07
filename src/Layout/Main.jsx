@@ -15,6 +15,8 @@ const Main = () => {
 
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
+  const [carts, setCarts] = useState([]);
+  const [currentUser, setCurrent] = useState(null);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -37,10 +39,41 @@ const Main = () => {
   const login = (email) => {
     const user = users.find((user) => user.email === email);
     if (user) {
+      setCurrent(user);
       localStorage.setItem("currentUser", JSON.stringify(user));
+      const userCart =
+        JSON.parse(localStorage.getItem(`cart ${user.email}`)) || [];
+      setCarts(userCart);
+
       return true;
     }
     return false;
+  };
+
+  const addToCart = (product) => {
+    const existsProduct = carts.find((item) => item.id === product.id);
+
+    if (existsProduct) {
+      setCarts(
+        carts.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCarts((prev) => [...prev, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const removeItem = (id) => {
+    setCarts((prev) => prev.filter((prevCart) => prevCart.id !== id));
+  };
+
+  const updateItem = (id, item) => {
+    setCarts((prev) =>
+      prev.map((prevItem) => (prevItem.id === id ? item : prevItem))
+    );
   };
 
   useEffect(() => {
@@ -51,14 +84,31 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
+    const carts = JSON.parse(localStorage.getItem("carts")) || [];
+    if (carts && carts.length > 0) {
+      setCarts(carts);
+    }
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("users", JSON.stringify(users));
-  }, [users]);
+  }, [users, carts]);
+
+  const saveCartCurrent = () => {
+    if (currentUser) {
+      localStorage.setItem(`cart_ ${currentUser.email}`, JSON.stringify(carts));
+    }
+  };
+
+  useEffect(() => {
+    saveCartCurrent();
+  }, [carts]);
 
   return (
     <>
       <AuthProvider value={{ users, register, login }}>
         <ProductProvider value={{ products }}>
-          <CartProvider value={{ addToCart, removeItem }}>
+          <CartProvider value={{ carts, addToCart, removeItem, updateItem }}>
             <div className="">
               {noHeaderFooter || <Navbar />}
               <Outlet></Outlet>

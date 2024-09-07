@@ -1,61 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext/AuthContext";
-// import loginImg from "../../assets/man-hands-hold-touch-tablet-pc-with-login-box-travel-concept.jpg";
-// import axios from "axios";
-// import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const urls = [
-  //   "https://work-notes-server.onrender.com/todo/login/",
-  //   "http://localhost:8000/todo/login/",
-  // ];
-
-  // const from = location.state?.form?.pathname || "/";
-
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const username = form.username.value;
-  //   const password = form.password.value;
-  //   // console.log(username, password);
-  //   try {
-  //     const requests = urls.map((url) =>
-  //       axios.post(url, {
-  //         username: username,
-  //         password: password,
-  //       })
-  //     );
-  //     const response = await Promise.any(requests);
-
-  //     // await axios.post("http://localhost:8000/todo/login/", {
-  //     //   username: username,
-  //     //   password: password,
-  //     // });
-  //     if (response.data?.token) {
-  //       localStorage.setItem("token", response.data.token);
-  //       localStorage.setItem("userId", response.data.user_id);
-
-  //       navigate(from, { replace: true });
-  //       toast.success("Logged In successfully", { duration: 6000 });
-  //       console.log("Login successful", response.data);
-  //     } else {
-  //       console.error("No token returned from API");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Login information is Not correct", { duration: 6000 });
-
-  //     console.error(
-  //       "Login failed",
-  //       error.response ? error.response.data : error
-  //     );
-  //   }
-  // };
   const [full, setFull] = useState("");
   const [email, setEmail] = useState("");
-  const [pas, setPass] = useState("");
   const { register } = useAuth();
 
   const handleReg = (e) => {
@@ -63,10 +13,9 @@ const Register = () => {
 
     if (!email) return;
 
-    register({ full, email, pas });
+    register({ full, email });
     setFull("");
     setEmail("");
-    setPass("");
     navigate("/login");
   };
 
@@ -113,7 +62,7 @@ const Register = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="w-full px-3 mb-6">
+              {/* <div className="w-full px-3 mb-6">
                 <label className="block uppercase tracking-wide text-lime-500 text-xs font-bold mb-2">
                   password
                 </label>
@@ -125,7 +74,7 @@ const Register = () => {
                   value={pas}
                   onChange={(e) => setPass(e.target.value)}
                 />
-              </div>
+              </div> */}
             </div>
             <div className="text-center mt-6">
               <input

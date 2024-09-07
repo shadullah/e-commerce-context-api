@@ -1,5 +1,16 @@
+import { useCart } from "../../../context/CartContext/CartContext.js";
+
 const ProductCard = ({ product }) => {
   const { title, price } = product;
+  const { addToCart } = useCart();
+
+  const handleAddCart = (e) => {
+    e.preventDefault();
+    console.log("clicked");
+
+    addToCart(product);
+  };
+
   return (
     <div>
       <div className="main">
@@ -14,16 +25,21 @@ const ProductCard = ({ product }) => {
           </div>
         </div> */}
 
-        <div className="card border-gray-200 border-2 mx-auto p-6 rounded-2xl grid grid-rows-[auto, 1fr, auto] h-[450px]">
-          <img className="h-60 mx-auto" src={product?.image} alt="" />
-          <div>
-            <h1 className="font-bold text-xl line-clamp-2">{title}</h1>
-            <p className="font-bold mt-2 text-xl">${price}</p>
+        <form onSubmit={handleAddCart}>
+          <div className="card border-gray-200 border-2 mx-auto p-6 rounded-2xl grid grid-rows-[auto, 1fr, auto] h-[450px]">
+            <img className="h-60 mx-auto" src={product?.image} alt="" />
+            <div>
+              <h1 className="font-bold text-xl line-clamp-2">{title}</h1>
+              <p className="font-bold mt-2 text-xl">${price}</p>
+            </div>
+            <button
+              type="submit"
+              className="bg-gray-600 w-full py-2 rounded-md"
+            >
+              Add to Cart
+            </button>
           </div>
-          <button className="bg-gray-600 w-full py-2 rounded-md">
-            Add to Cart
-          </button>
-        </div>
+        </form>
       </div>
     </div>
   );

@@ -1,9 +1,12 @@
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../../../context/CartContext/CartContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { carts } = useCart();
+
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
     navigate("/login");
@@ -43,9 +46,17 @@ const Navbar = () => {
             {localStorage.getItem("currentUser") ? (
               <>
                 <li className="mx-4 my-6 md:my-0">
-                  <Link className="text-xl text-sky-600" to="/">
-                    <FaShoppingCart />
-                  </Link>
+                  <div className="relative">
+                    <Link
+                      className="text-xl right-3 absolute text-sky-600"
+                      to="/carts"
+                    >
+                      <FaShoppingCart />{" "}
+                    </Link>
+                    <p className="text-[11px] bg-gray-400 text-gray-100 p-0.5 rounded-full">
+                      {carts.length}
+                    </p>
+                  </div>
                 </li>
                 <li className="mx-4 my-6 md:my-0">
                   <button

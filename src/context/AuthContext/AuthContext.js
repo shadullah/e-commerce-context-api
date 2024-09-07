@@ -6,7 +6,6 @@ export const AuthContext = createContext({
       id: 1,
       fullname: "shadullah",
       email: "example@gmail.com",
-      password: "000",
     },
   ],
   register: () => {},
