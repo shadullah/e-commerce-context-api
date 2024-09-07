@@ -8,7 +8,7 @@ const Products = () => {
     <div>
       <div className="flex justify-between">
         <div className="w-1/3">
-          <h1>Categories</h1>
+          <h1 className="text-lg font-bold">Categories</h1>
           <p>Shirt</p>
           <p>Sweater</p>
           {localStorage.getItem("currentUser") ? (

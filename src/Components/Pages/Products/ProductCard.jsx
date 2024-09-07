@@ -36,7 +36,7 @@ const ProductCard = ({ product }) => {
               <>
                 <button
                   type="submit"
-                  className="bg-gray-600 w-full py-2 rounded-md"
+                  className="bg-gray-600 font-bold text-gray-100 w-full py-2 rounded-md"
                 >
                   Add to Cart
                 </button>
