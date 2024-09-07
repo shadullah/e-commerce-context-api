@@ -11,6 +11,13 @@ const Products = () => {
           <h1>Categories</h1>
           <p>Shirt</p>
           <p>Sweater</p>
+          {localStorage.getItem("currentUser") ? (
+            <></>
+          ) : (
+            <>
+              <p>N.B: Login to Add to cart</p>
+            </>
+          )}
         </div>
         <div className="w-full">
           <div className="grid grid-cols-3 gap-6">
