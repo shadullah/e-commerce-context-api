@@ -15,7 +15,9 @@ const Products = () => {
             <></>
           ) : (
             <>
-              <p>N.B: Login to Add to cart</p>
+              <p className="text-red-600">
+                N.B: Login to active cart functionality
+              </p>
             </>
           )}
         </div>
