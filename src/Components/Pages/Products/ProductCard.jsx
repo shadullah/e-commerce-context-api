@@ -32,12 +32,18 @@ const ProductCard = ({ product }) => {
               <h1 className="font-bold text-xl line-clamp-2">{title}</h1>
               <p className="font-bold mt-2 text-xl">${price}</p>
             </div>
-            <button
-              type="submit"
-              className="bg-gray-600 w-full py-2 rounded-md"
-            >
-              Add to Cart
-            </button>
+            {localStorage.getItem("currentUser") ? (
+              <>
+                <button
+                  type="submit"
+                  className="bg-gray-600 w-full py-2 rounded-md"
+                >
+                  Add to Cart
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </form>
       </div>

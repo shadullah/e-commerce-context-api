@@ -13,11 +13,6 @@ const Cart = () => {
   }, [carts]);
 
   const handlePlus = (id) => {
-    // setCartItems((prevItems) =>
-    //   prevItems.map((item) =>
-    //     item._id === id ? { ...item, quantity: item.quantity + 1 } : item
-    //   )
-    // );
     const changedItem = carts.find((item) => item.id === id);
     if (changedItem) {
       updateItem(id, { ...changedItem, quantity: changedItem.quantity + 1 });
